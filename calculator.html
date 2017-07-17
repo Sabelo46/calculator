@@ -7,38 +7,7 @@
   <link rel="stylesheet" href="css/bootstrap.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
   <script src="js/bootstrap.js"></script>
-  <script>
-  var fval = 0;
-  var sval = 0;
-  var oper = '';
-  
-  function bone(x)
-  {
-	  form1.screen.value+=x;
-	  
-	}
-
-
-	function operator(op)
-	{
-		fval = parseInt(form1.screen.value);
-		oper = op;
-		form1.screen.value = '';
-	}
-	function equalto()
-	{
-		sval = parseInt(form1.screen.value);
-		if(oper == '+')
-		{
-			form1.screen.value = fval + sval;	
-		}
-		else if(oper == '-')
-		{
-			form1.screen.value = fval - sval;	
-		}
-	}
-  </script>
-  
+ 
   
 </head>
 <body>
@@ -48,8 +17,9 @@
   <form name="form1" method="post" action="">
     <table width="14%" border="1">
       <tr>
-        <td colspan="4"><input type="text" name='screen'/></td>
+        <td colspan="4"><input type="text" name='screen'/ id="screen" class="form-control"></td>
       </tr>
+     
       <tr>
         <td width="5%"><input type="button" name="button" id="button" value="1" onclick="bone('1')" class="form-control"></td>
         <td width="5%"><input type="button" name="button" id="button2" value="2" onclick="bone('2')" class="form-control"></td>
@@ -75,10 +45,78 @@
         <td><input type="button" name="button13" id="button14" value="=" onclick='equalto()' class="form-control"></td>
         <td><input type="button" name="button12" id="button13" value="/" onclick="operator('/')" class="form-control"></td>
       </tr>
+       <tr>
+      	<td colspan="4"><input type="button" name="button" id="btn" value="ON" class="form-control" onclick="power()"></td>
+      </tr>
     </table>
  </form>
 	</div>
 </div>
+ <script>
+  var fval = 0;
+  var sval = 0;
+  var oper = '';
+  
+  function bone(x)
+  {
+  	if(document.getElementById("btn").value == "OFF")
+		{
+			
+		  	if(document.getElementById('screen').value=="0")
+		  	{
+		  		form1.screen.value=x;
+		  	}
+		  	else
+		  	{
+		  		 form1.screen.value+=x;
+		  	}
+		  
+  		}
+	  else{alert("CLICK THE OFF BUTTON TO SWITCH ON");}
+	}
 
+
+	function operator(op)
+	{
+		fval = parseInt(form1.screen.value);
+		oper = op;
+		form1.screen.value = '';
+	}
+	function equalto()
+	{
+		sval = parseInt(form1.screen.value);
+		if(oper == '+')
+		{
+			form1.screen.value = fval + sval;	
+		}
+		else if(oper == '-')
+		{
+			form1.screen.value = fval - sval;	
+		}
+		else if(oper == '*')
+		{
+			form1.screen.value = fval * sval;	
+		}
+		else if(oper == '/')
+		{
+			form1.screen.value = fval / sval;	
+		}
+	}
+		function power()
+	{
+		
+		var b = document.getElementById("btn").value;
+			if(b=="ON"){
+				document.getElementById("btn").value ="OFF";
+				document.getElementById("screen").value = 0;
+			}
+			else{
+				document.getElementById("btn").value = "ON";
+				document.getElementById("screen").value = "";
+			}
+	}
+
+  </script>
+  
 </body>
 </html>
